@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Register</title>
+</head>
+<body>
+    <div class="bg-gray-50 font-[sans-serif]">
+        <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+          <div class="max-w-md w-full">
+            <div class="p-8 rounded-2xl bg-white shadow">
+              <h2 class="text-gray-800 text-center text-2xl font-bold">Register</h2>
+              <form id="registerForm" class="mt-8 space-y-4">
+                
+                <!-- Full Name -->
+                <div>
+                  <label class="text-gray-800 text-sm mb-2 block">Full Name</label>
+                  <div class="relative flex items-center">
+                    <input id="fullName" type="text" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter full name" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" class="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
+                      <path d="M12 2a6 6 0 0 1 6 6c0 3.314-2.686 6-6 6s-6-2.686-6-6a6 6 0 0 1 6-6zm0 10c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zM12 14c-4.418 0-8 3.582-8 8h2a6 6 0 0 1 12 0h2c0-4.418-3.582-8-8-8z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label class="text-gray-800 text-sm mb-2 block">Email</label>
+                  <div class="relative flex items-center">
+                    <input id="email" type="email" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter email" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" class="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
+                      <path d="M12 2a10 10 0 0 1 10 10v6c0 1.104-.896 2-2 2H4c-1.104 0-2-.896-2-2v-6a10 10 0 0 1 10-10z" />
+                    </svg>
+                  </div>
+                </div>
+                  
+                <!-- Password -->
+                <div>
+                  <label class="text-gray-800 text-sm mb-2 block">Password</label>
+                  <div class="relative flex items-center">
+                    <input id="password" type="password" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter password" />
+                  </div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                  <label class="text-gray-800 text-sm mb-2 block">Confirm Password</label>
+                  <div class="relative flex items-center">
+                    <input id="confirmPassword" type="password" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Confirm password" />
+                  </div>
+                </div>
+                
+                <div class="!mt-8">
+                  <button type="submit" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                    Register
+                  </button>
+                </div>
+
+                <p class="text-gray-800 text-sm !mt-8 text-center">Already have an account? <a href="login.html" class="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">Login here</a></p>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="module" src="/user/script.js"></script>
+      <script src="script.js"></script>
+</body>
+</html>

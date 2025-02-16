@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+        // Import Firebase libraries
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+        import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+    
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
+            authDomain: "foodking-9d9f6.firebaseapp.com",
+            projectId: "foodking-9d9f6",
+            storageBucket: "foodking-9d9f6.appspot.com",
+            messagingSenderId: "986420369140",
+            appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+    
+        // ImgBB API Key
+        const imgBBApiKey = "2c3348b5994d4cc83472a94695ec5c97";
+    
+        // Tab navigation
+        document.getElementById("add-product-tab").addEventListener("click", function() {
+            showTab('add-product-content');
+        });
+        document.getElementById("all-products-tab").addEventListener("click", function() {
+            showTab('all-products-content');
+        });
+        document.getElementById("all-orders-tab").addEventListener("click", function() {
+            showTab('all-orders-content');
+        });
+        document.getElementById("logout-tab").addEventListener("click", function() {
+            showTab('logout-content');
+        });
+    
+        function showTab(tabId) {
+    // Hide all tab content
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.add('hidden'));
+
+    // Show the selected tab
+    const selectedTab = document.getElementById(tabId);
+    selectedTab.classList.remove('hidden');
+
+    // Toggle the sidebar visibility based on the selected tab
+    const sidebar = document.getElementById("sidebar");
+
+    // Check if the tab is one of the main ones where we want to toggle the sidebar
+    if (tabId === 'add-product-content' || tabId === 'all-products-content' || tabId === 'all-orders-content' || tabId === 'logout-content') {
+        sidebar.classList.toggle("-translate-x-full"); // Toggle sidebar visibility
+    }
+}
+
+// Ensure products are loaded when switching to "All Products" tab
+document.getElementById("all-products-tab").addEventListener("click", function() {
+    showTab('all-products-content');
+    loadProducts();  // Load products only when the "All Products" tab is shown
+});
+
+
+        
+    
+        // Add product form submission
+        document.getElementById("add-product-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+    
+            const name = document.getElementById("product-name").value;
+            const description = document.getElementById("product-description").value;
+            const price = document.getElementById("product-price").value;
+            const discount = document.getElementById("product-discount").value;
+            const file = document.getElementById("product-image").files[0];
+    
+            // Check if product already exists
+            const productQuery = query(collection(db, "products"), where("name", "==", name));
+            const querySnapshot = await getDocs(productQuery);
+            if (!querySnapshot.empty) {
+                alert("This product already exists!");
+                return;
+            }
+
+            // Upload image to ImgBB
+            const formData = new FormData();
+            formData.append("image", file);
+    
+            const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgBBApiKey}`, {
+                method: "POST",
+                body: formData,
+            });
+            const data = await res.json();
+    
+            if (data.status === 200) {
+                // Get the image URL from ImgBB response
+                const imageUrl = data.data.url;
+    
+                // Store product details in Firestore
+                const productRef = doc(collection(db, "products"));
+                await setDoc(productRef, {
+                    name,
+                    description,
+                    price,
+                    discount,
+                    imageUrl,
+                });
+    
+                alert("Product added successfully!");
+                showTab('all-products-content');
+                loadProducts();
+            } else {
+                alert("Failed to upload image.");
+            }
+        });
+  async function loadProducts() {
+    // Check if the "All Products" tab is visible before loading the products
+    if (document.getElementById("all-products-content").classList.contains('hidden')) {
+        return;  // Don't load products if the "All Products" tab is hidden
+    }
+
+    const querySnapshot = await getDocs(collection(db, "products"));
+    const products = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
+    const productCards = products.map(product => `
+        <div class="bg-white shadow-lg p-6 rounded-lg">
+            <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4">
+            <h3 class="text-xl font-semibold">${product.name}</h3>
+            <p class="text-gray-700">${product.description}</p>
+            <p class="font-bold ${product.discount ? 'text-black' : 'text-[#0FB478]'}">
+                $${product.price}
+            </p>
+            ${product.discount ? `<p class="text-[#0FB478] line-through">$${product.discount}</p>` : ''}
+            <div class="flex space-x-4 mt-4">
+                <button class="bg-yellow-500 text-white py-1 px-4 rounded" onclick="editProduct('${product.id}')">Edit</button>
+                <button class="bg-red-500 text-white py-1 px-4 rounded" onclick="deleteProduct('${product.id}')">Delete</button>
+            </div>
+        </div>
+    `).join("");
+
+    document.getElementById("product-cards").innerHTML = productCards;
+}
+
+// Ensure to call loadProducts only when "All Products" tab is active
+document.getElementById("all-products-tab").addEventListener("click", function() {
+    showTab('all-products-content');
+    loadProducts();  // Load products when the "All Products" tab is shown
+});
+
+    
+        // Edit product functionality
+        window.editProduct = function(productId) {
+            const productRef = doc(db, "products", productId);
+            getDoc(productRef).then(docSnap => {
+                if (docSnap.exists()) {
+                    const product = docSnap.data();
+                    // Populate the form with the existing product data
+                    document.getElementById("product-name").value = product.name;
+                    document.getElementById("product-description").value = product.description;
+                    document.getElementById("product-price").value = product.price;
+                    document.getElementById("product-discount").value = product.discount || '';
+                    
+                    // Open the form to edit the product
+                    showTab('add-product-content');
+                    
+                    // Change the form action to update the product
+                    const form = document.getElementById("add-product-form");
+                    form.onsubmit = function(e) {
+                        e.preventDefault();
+                        updateProduct(productId); // Use productId for updating the existing product
+                    };
+                } else {
+                    alert("Product not found!");
+                }
+            });
+        };
+    
+        // Update product functionality
+        async function updateProduct(productId) {
+            const name = document.getElementById("product-name").value;
+            const description = document.getElementById("product-description").value;
+            const price = document.getElementById("product-price").value;
+            const discount = document.getElementById("product-discount").value;
+            const file = document.getElementById("product-image").files[0];
+    
+            let imageUrl = '';
+            if (file) {
+                // Upload image to ImgBB if a new image is provided
+                const formData = new FormData();
+                formData.append("image", file);
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgBBApiKey}`, {
+                    method: "POST",
+                    body: formData,
+                });
+                const data = await res.json();
+                if (data.status === 200) {
+                    imageUrl = data.data.url;
+                } else {
+                    alert("Failed to upload image.");
+                    return;
+                }
+            }
+    
+            const updatedProduct = {
+                name,
+                description,
+                price,
+                discount,
+                imageUrl: imageUrl || null, // Keep existing image if no new one
+            };
+    
+            // Update the existing product document by productId
+            const productRef = doc(db, "products", productId);
+            await setDoc(productRef, updatedProduct, { merge: true });  // Use merge: true to avoid overwriting the entire document
+    
+            alert("Product updated successfully!");
+            showTab('all-products-content');
+            loadProducts(); // Reload the products list to reflect changes
+        }
+    
+        // Delete product functionality
+        window.deleteProduct = async function(productId) {
+            const productRef = doc(db, "products", productId);
+            await deleteDoc(productRef);
+            alert("Product deleted successfully!");
+            loadProducts();
+        };
+    
+        // Logout functionality
+        document.getElementById("logout-button").addEventListener("click", () => {
+            // Implement logout logic (Firebase logout example)
+            firebase.auth().signOut().then(() => {
+                alert("Logged out successfully!");
+                // Redirect or handle logout UI
+            }).catch((error) => {
+                alert("Error logging out: " + error.message);
+            });
+        });
+        
+    </script>
+</head>
+<body>
+    <!-- Sidenav -->
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white p-4 transition-transform transform -translate-x-full sm:translate-x-0  mysidebar">
+            <div class="profile mb-6">
+                <img src="https://imdezcode.files.wordpress.com/2020/02/imdezcode-logo.png" alt="Profile Picture" width="100" height="100" class="rounded-full mb-4">
+                <div class="name font-bold text-xl">Admin</div>
+            </div>
+
+            <div class="sidenav-url">
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="add-product-tab">Add New Product</button>
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="all-products-tab">All Products</button>
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="all-orders-tab">All Orders</button>
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="logout-tab">Logout</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <!-- Toggle Button -->
+            <button id="toggle-sidebar" class="md:hidden p-2 bg-gray-800 text-white rounded-full fixed top-4 left-4">
+                <span class="material-icons">menu</span>
+            </button>
+
+            <!-- Tab Content -->
+            <div id="add-product-content" class="tab-content">
+                <h2 class="text-2xl font-semibold mb-4">Add New Product</h2>
+                <form id="add-product-form" class="bg-white shadow-lg p-6 rounded-lg space-y-4">
+                    <div>
+                        <label for="product-name" class="block text-gray-700">Product Name</label>
+                        <input type="text" id="product-name" class="w-full border border-gray-300 p-2 rounded" required>
+                    </div>
+                    <div>
+                        <label for="product-description" class="block text-gray-700">Product Description</label>
+                        <textarea id="product-description" class="w-full border border-gray-300 p-2 rounded" maxlength ="100" minlength ="100"  placeholder="Add Description Max Characters 100" required></textarea>
+                    </div>
+                    <div>
+                        <label for="product-price" class="block text-gray-700"> Price</label>
+                        <input type="number" id="product-price" class="w-full border border-gray-300 p-2 rounded" required>
+                    </div>
+                    <div>
+                        <label for="product-discount" class="block text-gray-700">Discounted Price</label>
+                        <input type="number" id="product-discount" class="w-full border border-gray-300 p-2 rounded" >
+                    </div>
+                 
+                  
+                  
+                    <div>
+                        <label for="product-image" class="block text-gray-700">Product Image</label>
+                        <input type="file" id="product-image" class="w-full border border-gray-300 p-2 rounded" required>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Add Product</button>
+                    </div>
+                </form>
+            </div>
+            <div id="all-products-content" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">All Products</h2>
+                <div id="product-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+    
+            <div id="all-orders-content" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">All Orders</h2>
+                <!-- Order list will be displayed here -->
+            </div>
+    
+            <div id="logout-content" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">Logout</h2>
+                <button id="logout-button" class="bg-red-500 text-white py-2 px-4 rounded">Logout</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Sidebar toggle functionality
+        document.getElementById("toggle-sidebar").addEventListener("click", function() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("-translate-x-full");
+        });
+    </script>
+</body>
+</html>

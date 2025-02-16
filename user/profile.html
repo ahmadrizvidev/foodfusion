@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+   
+    <!-- Sidenav -->
+    <div class="flex h-screen">
+        <div class="w-64 bg-gray-800 text-white p-4">
+            <div class="profile mb-6">
+                <img src="https://imdezcode.files.wordpress.com/2020/02/imdezcode-logo.png" alt="Profile Picture" width="100" height="100" class="rounded-full mb-4">
+                <div class="name font-bold text-xl" id="user-name">Loading...</div>
+               
+            </div>
+
+            <div class="sidenav-url">
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="profile-tab">Profile</button>
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="order-tab">Order</button>
+                <button class="text-white w-full text-left py-2 px-4 hover:bg-gray-700" id="logout-tab">Logout</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div id="profile-content" class="tab-content">
+                <h2 class="text-2xl font-semibold mb-4">IDENTITY</h2>
+                <div class="card bg-white shadow-lg p-6 rounded-lg">
+                    <div class="card-body">
+                        <i class="fa fa-pen fa-xs edit absolute top-4 right-6 cursor-pointer"></i>
+                        <table class="w-full text-left">
+                            <tbody>
+                                <tr>
+                                    <td class="py-2">Email</td>
+                                    <td class="py-2">:</td>
+                                    <td class="py-2" id="user-email">Loading...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2">Address</td>
+                                    <td class="py-2">:</td>
+                                    <td class="py-2" id="user-address">Loading...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2">Phone</td>
+                                    <td class="py-2">:</td>
+                                    <td class="py-2" id="user-phone">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Tabs (Placeholder) -->
+            <div id="order-content" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">Order History</h2>
+                <p class="text-gray-700">No orders yet.</p>
+            </div>
+
+            <div id="logout-content" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">Logout</h2>
+                <button class="bg-red-500 text-white py-2 px-4 rounded" id="logout-button">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase and JS Logic -->
+    <script type="module">
+        // Firebase imports
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
+    authDomain: "foodking-9d9f6.firebaseapp.com",
+    projectId: "foodking-9d9f6",
+    storageBucket: "foodking-9d9f6.firebasestorage.app",
+    messagingSenderId: "986420369140",
+    appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Function to fetch user and address data
+        const fetchUserData = async () => {
+            document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        if (!auth.currentUser) {
+            window.location.href = "/login.html";
+            console.log(auth)
+        }
+    }, 100); // 1-second delay to allow Firebase auth state to load
+});
+
+            try {
+                // Fetch user data from Firestore
+                const userRef = doc(db, 'users', user.uid);
+                const addressesRef = doc(db, 'addresses', user.uid);
+
+                const userDoc = await getDoc(userRef);
+                const addressDoc = await getDoc(addressesRef);
+
+                if (userDoc.exists() && addressDoc.exists()) {
+                    const userData = userDoc.data();
+                    const addressData = addressDoc.data();
+
+                    // Display user info on the profile page
+                    document.getElementById('user-name').innerText = userData.fullName || 'No Name';
+                    document.getElementById('user-email').innerText = userData.email || 'No Email';
+                    document.getElementById('user-address').innerText = addressData.address || 'No Address';
+                    document.getElementById('user-phone').innerText = addressData.phone || 'No Phone';
+                } else {
+                    console.log('User or address document does not exist');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        // Tab switching logic
+        document.getElementById('profile-tab').addEventListener('click', () => {
+            document.getElementById('profile-content').classList.remove('hidden');
+            document.getElementById('order-content').classList.add('hidden');
+            document.getElementById('logout-content').classList.add('hidden');
+        });
+
+        document.getElementById('order-tab').addEventListener('click', () => {
+            document.getElementById('profile-content').classList.add('hidden');
+            document.getElementById('order-content').classList.remove('hidden');
+            document.getElementById('logout-content').classList.add('hidden');
+        });
+
+        document.getElementById('logout-tab').addEventListener('click', () => {
+            document.getElementById('profile-content').classList.add('hidden');
+            document.getElementById('order-content').classList.add('hidden');
+            document.getElementById('logout-content').classList.remove('hidden');
+        });
+
+        // Fetch user data when page loads
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                fetchUserData();
+            }
+        });
+
+        // Logout button
+        document.getElementById('logout-button').addEventListener('click', async () => {
+            await auth.signOut();
+            window.location.href = '/user/login.html';  // Redirect to login page
+        });
+    </script>
+    <script>
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-gray-50 font-[sans-serif] min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full bg-white p-8 rounded-lg shadow">
+            <h2 class="text-center text-2xl font-bold text-gray-800">Verify Email</h2>
+            <p class="text-center text-gray-600 text-sm mt-2">Check your email for the verification link.</p>
+            
+            <div class="mt-6 flex flex-col space-y-4">
+                <button id="checkVerification" class="w-full py-3 px-4 text-sm rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                    Check Verification
+                </button>
+                <button id="resendEmail" class="w-full py-3 px-4 text-sm rounded-lg text-gray-800 border border-gray-300 hover:bg-gray-100 focus:outline-none">
+                    Resend Email
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
+            authDomain: "foodking-9d9f6.firebaseapp.com",
+            projectId: "foodking-9d9f6",
+            storageBucket: "foodking-9d9f6.firebasestorage.app",
+            messagingSenderId: "986420369140",
+            appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Function to check if the email is verified on page load
+        function checkEmailVerification() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    user.reload().then(() => {
+                        if (user.emailVerified) {
+                            // Redirect if email is verified
+                            window.location.href = "/user/dashboard.html"; // Redirect to dashboard or another page
+                        }
+                    });
+                }
+            });
+        }
+
+        document.getElementById("checkVerification").addEventListener("click", () => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    user.reload().then(() => {
+                        if (user.emailVerified) {
+                            
+                            window.location.href = "/user/dashboard.html"; // Redirect to dashboard
+                        } else {
+                            alert("Email not verified yet. Please check your inbox.");
+                        }
+                    });
+                }
+            });
+        });
+
+        document.getElementById("resendEmail").addEventListener("click", () => {
+            const user = auth.currentUser;
+            if (user) {
+                user.reload().then(() => {
+                    if (user.emailVerified) {
+                       
+                    } else {
+                        sendEmailVerification(user)
+                            .then(() => alert("Verification email resent! Check your inbox."))
+                            .catch(error => alert(error.message));
+                    }
+                });
+            }
+        });
+
+        // Run check when the page loads
+        checkEmailVerification();
+    </script>
+</body>
+</html>

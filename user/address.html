@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
+    authDomain: "foodking-9d9f6.firebaseapp.com",
+    projectId: "foodking-9d9f6",
+    storageBucket: "foodking-9d9f6.firebasestorage.app",
+    messagingSenderId: "986420369140",
+    appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    document.getElementById('address-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
+      onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = '/login.html'; // Redirect if not logged in
+    }
+  });
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const userUid = user.uid;
+          await setDoc(doc(db, "addresses", userUid), {
+            name,
+            address,
+            phone,
+          });
+          alert("Address saved successfully!");
+        } else {
+          alert("No user logged in.");
+        }
+      });
+    });
+  </script>
+  <title>Shipment Address</title>
+</head>
+<body class="bg-gray-50 font-[sans-serif]">
+  <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+    <div class="max-w-lg w-full p-8 bg-white rounded-2xl shadow-lg">
+      <h2 class="text-gray-800 text-center text-2xl font-bold">Food Shipment Address</h2>
+      <form id="address-form" class="mt-6 space-y-4">
+        <div>
+          <label for="name" class="text-gray-800 text-sm mb-2 block">Full Name</label>
+          <input id="name" name="name" type="text" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter full name" />
+        </div>
+        <div>
+          <label for="address" class="text-gray-800 text-sm mb-2 block">Address</label>
+          <textarea id="address" name="address" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter your address"></textarea>
+        </div>
+        <div>
+          <label for="phone" class="text-gray-800 text-sm mb-2 block">Phone Number</label>
+          <input id="phone" name="phone" type="tel" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter phone number" />
+        </div>
+        <div>
+      
+        </div>
+        <div class="!mt-5">
+          <button type="submit" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+            Proceed to Payment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

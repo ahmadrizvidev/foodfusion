@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Login</title>
+</head>
+<body>
+  <div class="bg-gray-50 font-[sans-serif]">
+    <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
+      <div class="max-w-md w-full">
+        <div class="p-8 rounded-2xl bg-white shadow">
+          <h2 class="text-gray-800 text-center text-2xl font-bold">Sign in</h2>
+          <form id="login-form" class="mt-8 space-y-4">
+            <!-- Email Field -->
+            <div>
+              <label for="email" class="text-gray-800 text-sm mb-2 block">Email</label>
+              <div class="relative flex items-center">
+                <input id="email" name="email" type="email" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter email" />
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div>
+              <label for="password" class="text-gray-800 text-sm mb-2 block">Password</label>
+              <div class="relative flex items-center">
+                <input id="password" name="password" type="password" required class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter password" />
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-4 mt-7">
+              <div class="flex items-center">
+                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                <label for="remember-me" class="ml-3 block text-sm text-gray-800">
+                  Remember me
+                </label>
+              </div>
+              <div class="text-sm">
+                <a href="/user//forgotpassword.html" class="text-blue-600 hover:underline font-semibold">
+                  Forgot your password?
+                </a>
+              </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="!mt-5">
+              <button id="submit-btn" type="submit" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                Sign in
+                <span id="loading-icon" class="hidden animate-spin absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
+                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <p class="text-gray-800 text-sm !mt-5 text-center">Don't have an account? <a href="/user/register.html" class="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">Register here</a></p>
+            <!-- Error Message -->
+            <p id="error-message" class="text-red-600 text-center hidden mt-4"></p>
+
+            <!-- Success Message -->
+            <p id="success-message" class="text-green-600 text-center hidden mt-4"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import Firebase SDK (modular version)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
+      authDomain: "foodking-9d9f6.firebaseapp.com",
+      projectId: "foodking-9d9f6",
+      storageBucket: "foodking-9d9f6.firebasestorage.app",
+      messagingSenderId: "986420369140",
+      appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+   onAuthStateChanged(auth, async(user) => {
+    if (user) {
+      // Redirect to the appropriate page if logged in
+      if (user.email === 'ahmadrizvi.dev@gmail.com') {
+        window.location.href = '/admin.html';
+      } else {
+        const userDocRef = doc(db, "users", user.uid); // assuming you store user info in "users" collection
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          window.location.href = '/user/profile.html'; // User has a profile, redirect to profile page
+        } else {
+          window.location.href = '/user/address.html'; // First-time user, redirect to address page
+        }
+      }
+    }
+  });
+    // Keep User Logged In
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('user');
+      }
+    });
+    
+  
+    // Login Form Handling
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+  
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+  
+      if (!email || !password) {
+        document.getElementById('error-message').textContent = 'Both email and password are required!';
+        document.getElementById('error-message').classList.remove('hidden');
+        return;
+      }
+  
+      document.getElementById('submit-btn').setAttribute('disabled', 'true');
+      document.getElementById('loading-icon').classList.remove('hidden');
+  
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+  
+        if (user.emailVerified) {
+          // Check if the email is "ahmadrizvi.dev"
+          if (user.email === 'ahmadrizvi.dev@gmail.com') {
+            // Redirect to admin page if the email matches
+            localStorage.setItem('user', JSON.stringify(user));
+            document.getElementById('success-message').textContent = 'Login successful! Redirecting to admin...';
+            document.getElementById('success-message').classList.remove('hidden');
+  
+            setTimeout(() => {
+              window.location.href = '/admin.html';
+            }, 2000);
+          } else {
+            // Check if the user profile exists in Firestore
+            const userDocRef = doc(db, "users", user.uid); // assuming you store user info in "users" collection
+            const userDoc = await getDoc(userDocRef);
+  
+            if (userDoc.exists()) {
+              // User exists, redirect to profile page
+              localStorage.setItem('user', JSON.stringify(user));
+              document.getElementById('success-message').textContent = 'Login successful! Redirecting...';
+              document.getElementById('success-message').classList.remove('hidden');
+  
+              setTimeout(() => {
+                window.location.href = '/user/profile.html';
+              }, 2000);
+            } else {
+              // First-time user, redirect to address page
+              localStorage.setItem('user', JSON.stringify(user));
+              document.getElementById('success-message').textContent = 'Login successful! Redirecting...';
+              document.getElementById('success-message').classList.remove('hidden');
+  
+              setTimeout(() => {
+                window.location.href = '/user/address.html';
+              }, 2000);
+            }
+          }
+        } else {
+          document.getElementById('error-message').textContent = 'Please verify your email before logging in.';
+          document.getElementById('error-message').classList.remove('hidden');
+        }
+      } catch (error) {
+        const errorCode = error.code;
+        if (errorCode === 'auth/wrong-password') {
+          document.getElementById('error-message').textContent = 'Incorrect password. Please try again.';
+        } else if (errorCode === 'auth/user-not-found') {
+          document.getElementById('error-message').textContent = 'No user found with this email.';
+        } else {
+          document.getElementById('error-message').textContent = `Error: ${error.message}`;
+        }
+        document.getElementById('error-message').classList.remove('hidden');
+      } finally {
+        document.getElementById('submit-btn').removeAttribute('disabled');
+        document.getElementById('loading-icon').classList.add('hidden');
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>

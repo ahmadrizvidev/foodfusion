@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+   
+  </head>
+<body>
+    <div id="preloader">
+        <img src="Animation - 1738323339859.gif" alt="Loading..." class="h-24 w-100">
+    </div>
+
+    <header class='flex shadow-[0px_4px_16px_rgba(17,_17,_26,_0.1),_0px_8px_32px_rgba(17,_17,_26,_0.05)] py-4 px-4 sm:px-6 bg-white font-[sans-serif] min-h-[75px] tracking-wide relative z-50'>
+        <div class='flex flex-wrap items-center gap-5 w-full max-w-screen-xl mx-auto'>
+          <a href="/"><img src="logo.svg" alt="logo"
+            class='w-36' />
+          </a>
+  
+          <div id="collapseMenu"
+            class='max-lg:hidden lg:!flex lg:ml-auto max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-[50]'>
+            <button id="toggleClose" class='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border'>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-black" viewBox="0 0 320.591 320.591">
+                <path
+                  d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                  data-original="#000000"></path>
+                <path
+                  d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                  data-original="#000000"></path>
+              </svg>
+            </button>
+  
+            <ul
+              class='lg:flex gap-4 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
+              <li class='mb-6 hidden max-lg:block'>
+                <a href="javascript:void(0)"><img src="logo.svg" alt="logo" class='w-40' />
+                </a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'>
+                <a href='javascript:void(0)'
+                  class='hover:text-[#007bff] text-[#007bff] font-semibold block text-[15px]'>Home</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='#about'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>About</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='#menu'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Menu</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='#reviews'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Reviews</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='#contact'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Contact</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'>
+                <a id="authLink" href="" class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Login</a>
+            </li>
+            </ul>
+          </div>
+  
+          <div class='flex items-center max-lg:ml-auto space-x-4'>
+            <button id="cartButton" 
+            class='flex items-center justify-center gap-2 px-5 py-3 text-[15px] rounded-lg font-semibold text-[#007bff] border border-[#007bff] bg-transparent hover:bg-[#007bff] hover:text-white shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007bff]'>
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart (0)</span>
+          </button>
+          
+        
+  
+            <button id="toggleOpen" class='lg:hidden'>
+              <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div id="successMessage"
+  class="hidden fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transition-opacity duration-300 z-50">
+</div>
+
+      <div class="hero h-fit w-full relative bg-gray-100 ">
+        <div id="controls-carousel" class="relative h-full w-full" data-carousel="static">
+            <!-- Carousel wrapper -->
+            <div class="relative h-full overflow-hidden mt-10 mb-10">
+                <!-- Hero Section -->
+                <div class=" inset-0 flex items-center justify-center bg-white text-center" data-carousel-item>
+                    <div class="font-[sans-serif] max-w-6xl mx-auto px-4 text-center md:text-left">
+                        <div class="grid md:grid-cols-2 items-center md:gap-10 gap-6">
+                            <!-- Text Content -->
+                            <div class="max-md:order-1 max-md:text-center">
+                                <p class="mt-4 text-sm font-bold text-blue-600">
+                                    <span class="rotate-90 inline-block mr-2 mb-2">|</span> Our Special Dish
+                                </p>
+                                <h2 class="text-gray-800 text-6xl font-extrabold mb-4 md:!leading-[55px]">
+                                    Hot Noodles
+                                </h2>
+                                <p class="mt-5 text-base text-gray-500 leading-relaxed">
+                                    Embark on a gastronomic journey with our curated dishes, delivered promptly to your doorstep.
+                                </p>
+                                <button
+                                class='items-center text-center mt-5 items-center justify-center gap-2 px-5 py-3 text-[15px] rounded-lg font-semibold text-[#007bff] border border-[#007bff] bg-transparent hover:bg-[#007bff] hover:text-white shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007bff]'>
+                               
+                                <span>Order Now</span>
+                            </button>
+                            </div>
+                            <!-- Image Content -->
+                            <div class="h- p-2">
+                                <img src="home-img-1.png" class="w-full h-full object-contain rounded-lg" alt="Dining Experience" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other Carousel Items -->
+                <div class=" inset-0 flex items-center justify-center bg-white text-center" data-carousel-item>
+                    <div class="font-[sans-serif] max-w-6xl mx-auto px-4 text-center md:text-left">
+                        <div class="grid md:grid-cols-2 items-center md:gap-10 gap-6">
+                            <!-- Text Content -->
+                            <div class="max-md:order-1 max-md:text-center">
+                                <p class="mt-4 text-sm font-bold text-blue-600">
+                                    <span class="rotate-90 inline-block mr-2 mb-2">|</span> Our Special Dish
+                                </p>
+                                <h2 class="text-gray-800 text-6xl font-extrabold mb-4 md:!leading-[55px]">
+                                    Crispy Chicken
+                                </h2>
+                                <p class="mt-5 text-base text-gray-500 leading-relaxed">
+                                    Embark on a gastronomic journey with our curated dishes, delivered promptly to your doorstep.
+                                </p>
+                                <button
+                                class='items-center text-center mt-5 items-center justify-center gap-2 px-5 py-3 text-[15px] rounded-lg font-semibold text-[#007bff] border border-[#007bff] bg-transparent hover:bg-[#007bff] hover:text-white shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007bff]'>
+                               
+                                <span>Order Now</span>
+                            </button>
+                            </div>
+                            <!-- Image Content -->
+                            <div class="h-full p-2">
+                                <img src="home-img-2.png" class="w-full h-full object- rounded-lg" alt="Dining Experience" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" inset-0 flex items-center justify-center bg-white text-center" data-carousel-item>
+                    <div class="font-[sans-serif] max-w-6xl mx-auto px-4 text-center md:text-left">
+                        <div class="grid md:grid-cols-2 items-center md:gap-10 gap-6">
+                            <!-- Text Content -->
+                            <div class="max-md:order-1 max-md:text-center">
+                                <p class="mt-4 text-sm font-bold text-blue-600">
+                                    <span class="rotate-90 inline-block mr-2 mb-2">|</span> Our Special Dish
+                                </p>
+                                <h2 class="text-gray-800 text-6xl font-extrabold mb-4 md:!leading-[55px]">
+                                    Hot Pizza
+                                </h2>
+                                <p class="mt-5 text-base text-gray-500 leading-relaxed">
+                                    Embark on a gastronomic journey with our curated dishes, delivered promptly to your doorstep.
+                                </p>
+                                <button
+                                class='items-center text-center mt-5 items-center justify-center gap-2 px-5 py-3 text-[15px] rounded-lg font-semibold text-[#007bff] border border-[#007bff] bg-transparent hover:bg-[#007bff] hover:text-white shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007bff]'>
+                               
+                                <span>Order Now</span>
+                            </button>
+                            </div>
+                            <!-- Image Content -->
+                            <div class="h-full p-2">
+                                <img src="home-img-3.png" class="w-full h-full object- rounded-lg" alt="Dining Experience" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider controls -->
+            <button type="button" class="absolute top-1/2 left-4 z-40 transform -translate-y-1/2 flex items-center justify-center h-10 w-10 bg-gray-700/50 text-white rounded-full hover:bg-gray-700" data-carousel-prev>
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button type="button" class="absolute top-1/2 right-4 z-49 transform -translate-y-1/2 flex items-center justify-center h-10 w-10 bg-gray-700/50 text-white rounded-full hover:bg-gray-700" data-carousel-next>
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="" id="about">
+        <div class="bg-gray-100 py-14s ">
+      
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 pt-10 py-5">
+            <div class="service-item rounded pt-6 py-6 bg-white hover:bg-[#FEA116] group hover:text-white transition duration-300 ease-in-out sm:ml-3">
+              <div class="p-4">
+                <i class="fa fa-3x fa-user-tie text-[#FEA116] mb-4 transition duration-300 ease-in-out group-hover:text-white"></i>
+                <h5 class="text-gray-800 text-xl font-bold mb-2 transition duration-300 ease-in-out group-hover:text-white">Master Chefs</h5>
+                <p class="text-black transition duration-300 ease-in-out group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+              </div>
+            </div>
+            <div class="service-item rounded pt-3 bg-white hover:bg-[#FEA116] group hover:text-white transition duration-300 ease-in-out">
+              <div class="p-4">
+                <i class="fa fa-3x fa-utensils text-[#FEA116] mb-4 transition duration-300 ease-in-out group-hover:text-white"></i>
+                <h5 class="text-gray-800 text-xl font-bold mb-2 transition duration-300 ease-in-out group-hover:text-white">Quality Food</h5>
+                <p class="text-black transition duration-300 ease-in-out group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+              </div>
+            </div>
+            <div class="service-item rounded pt-3 bg-white hover:bg-[#FEA116] group hover:text-white transition duration-300 ease-in-out">
+              <div class="p-4">
+                <i class="fa fa-3x fa-cart-plus text-[#FEA116] mb-4 transition duration-300 ease-in-out group-hover:text-white"></i>
+                <h5 class="text-gray-800 text-xl font-bold mb-2 transition duration-300 ease-in-out group-hover:text-white">Online Order</h5>
+                <p class="text-black transition duration-300 ease-in-out group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+              </div>
+            </div>
+            <div class="service-item rounded pt-3 bg-white hover:bg-[#FEA116] group hover:text-white transition duration-300 ease-in-out sm:mr-3">
+              <div class="p-4">
+                <i class="fa fa-3x fa-headset text-[#FEA116] mb-4 transition duration-300 ease-in-out group-hover:text-white"></i>
+                <h5 class="text-gray-800 text-xl font-bold mb-2 transition duration-300 ease-in-out group-hover:text-white">24/7 Service</h5>
+                <p class="text-black transition duration-300 ease-in-out group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+    <!-- component -->
+
+    <div class="max-w-screen-xl mx-auto my-12 px-6">
+      <h1 class="text-5xl text-[#192a56] poppins pb-4 text-center">Why You Choose Us</h1>
+      <p class="text-gray-500 text-sm poppins text-center items-center">
+        Barton waited twenty always repair in within we do. An delighted offending curiosity my is dashwoods at. <br> Boy prosperous increasing surrounded.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-8">
+        <div class="bg-white transform transition duration-700 hover:scale-105 p-6 rounded-2xl hover:shadow-xl">
+          <div class="overflow-hidden rounded-2xl flex flex-grow">
+            <img class="transform transition duration-700 hover:scale-125" src="https://red-onion-restaurant-41dbe.web.app/assets/Image/adult-blur-blurred-background-687824.png" alt="Why Choose Us">
+          </div>
+          <div class="flex mt-6 space-x-3">
+            <div><img src="https://red-onion-restaurant-41dbe.web.app/assets/ICON/Group%20204.png" alt="Fast Delivery" class="w-36"></div>
+            <div class="flex flex-col space-y-3">
+              <h1 class="text-xl text-gray-800 poppins">Fast Delivery</h1>
+              <p class="text-sm text-gray-500 poppins">Keep your systems in sync with automated web hook-based notifications each time a link is paid and how we dream about our future.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white transform transition duration-700 hover:scale-105 p-6 rounded-2xl hover:shadow-xl">
+          <div class="overflow-hidden rounded-2xl flex flex-grow h-84 w-full justify-center items-center">
+            <img class="transform transition duration-700 hover:scale-125" src="https://red-onion-restaurant-41dbe.web.app/assets/Image/chef-cook-food-33614.png"/>
+          </div>
+          
+          <div class="flex mt-6 space-x-3">
+            <div><img src="https://red-onion-restaurant-41dbe.web.app/assets/ICON/Group%201133.png" alt="A Good Auto Responder" class="w-36"></div>
+            <div class="flex flex-col space-y-3">
+              <h1 class="text-xl text-gray-800 poppins">A Good Auto Responder</h1>
+              <p class="text-sm text-gray-500 poppins">Keep your systems in sync with automated web hook-based notifications each time a link is paid and how we dream about our future.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white transform transition duration-700 hover:scale-105 p-6 rounded-2xl hover:shadow-xl">
+          <div class="overflow-hidden rounded-2xl flex flex-grow">
+            <img class="transform transition duration-700 hover:scale-125" src="https://red-onion-restaurant-41dbe.web.app/assets/Image/architecture-building-city-2047397.png" alt="Why Choose Us">
+          </div>
+          <div class="flex mt-6 space-x-3">
+            <div><img src="https://red-onion-restaurant-41dbe.web.app/assets/ICON/Group%20245.png" alt="Home Delivery" class="w-36"></div>
+            <div class="flex flex-col space-y-3">
+              <h1 class="text-xl text-gray-800 poppins">Home Delivery</h1>
+              <p class="text-sm text-gray-500 poppins">Keep your systems in sync with automated web hook-based notifications each time a link is paid and how we dream about our future.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!-- This is an example component -->
+<div class="bg-gradient-to-br from-[#F9F5F3]">
+  
+  <h2 class="text-[#192a56] text-5xl font-extrabold  md:!leading-[55px] text-center pt-10">Our Menu</h2>
+  <div class="mt-4 flex items-center justify-center min-h-fit bg-gradient-to-br from-[#F9F5F3] via-[#F9F5F3] to-[#F9F5F3] px-4 py-5 pb-8">
+    <div id="product-menu" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+      <!-- Product cards will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+      <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Team</h2>
+          <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind</p>
+      </div> 
+      <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="img/team-1.jpg" alt="Bonnie Avatar">
+              </a>
+              <div class="p-5">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Bonnie Green</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">CEO & Web Developer</span>
+                  <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Bonnie drives the technical strategy of the flowbite platform and brand.</p>
+                  <ul class="flex space-x-4 sm:mt-0">
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div> 
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="img/team-2.jpg" alt="Jese Avatar">
+              </a>
+              <div class="p-5">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Jese Leos</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">CTO</span>
+                  <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Jese drives the technical strategy of the flowbite platform and brand.</p>
+                  <ul class="flex space-x-4 sm:mt-0">
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div> 
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="img/team-3.jpg" alt="Michael Avatar">
+              </a>
+              <div class="p-5">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Michael Gough</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">Senior Front-end Developer</span>
+                  <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Michael drives the technical strategy of the flowbite platform and brand.</p>
+                  <ul class="flex space-x-4 sm:mt-0">
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div> 
+          <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
+              <a href="#">
+                  <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="img/team-4.jpg" alt="Sofia Avatar">
+              </a>
+              <div class="p-5">
+                  <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Lana Byrd</a>
+                  </h3>
+                  <span class="text-gray-500 dark:text-gray-400">Marketing & Sale</span>
+                  <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Lana drives the technical strategy of the flowbite platform and brand.</p>
+                  <ul class="flex space-x-4 sm:mt-0">
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" clip-rule="evenodd" /></svg>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>  
+      </div>  
+  </div>
+</section>
+<div class="px-8 font-[sans-serif] mt-10 mb-20">
+  <h2 class="text-[#192a56] text-5xl font-extrabold mb-4 md:!leading-[55px] text-center pt-10 pb-10">Reviews</h2>
+  <div class="max-w-6xl mx-auto">
+    <div class="grid lg:grid-cols-3 gap-6 max-lg:max-w-2xl">
+      <div class="col-span-2">
+        <h2 class="text-gray-800 text-2xl font-bold">What our happy client say</h2>
+        <p class="text-sm text-gray-500 mt-4 leading-relaxed">Veniam proident aute magna anim excepteur et ex consectetur velit ullamco veniam minim aute sit. Elit occaecat officia et laboris Lorem minim. Officia do aliqua adipisicing ullamco in.</p>
+      </div>
+
+      <div class="flex space-x-4 items-end justify-end">
+        <div class="bg-gray-200 w-10 h-10 grid items-center justify-center rounded-full rotate-90 shrink-0 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-800 inline" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z" clip-rule="evenodd" data-original="#000000"></path>
+          </svg>
+        </div>
+        <div class="bg-blue-600 w-10 h-10 grid items-center justify-center rounded-full -rotate-90 shrink-0 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-[#fff] inline" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z" clip-rule="evenodd" data-original="#000000"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="overflow-auto px-10 pr-2 py-2 mt-12">
+      
+      <div class="min-w-[1052px] grid grid-cols-3 gap-12">
+        <div class="max-w-[360px] h-auto py-5 pl-14 pr-4 bg-white border-2 rounded-3xl relative">
+          <img src="https://readymadeui.com/team-2.webp" class="w-20 h-20 rounded-full absolute -left-10 top-0 bottom-0 my-auto border-2 border-gray-300" />
+
+          <div>
+            <h6 class="text-gray-800 text-[15px] font-bold">John Doe</h6>
+            <p class="mt-1 text-xs text-gray-500">Founder of Rubik</p>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-gray-800 text-sm leading-relaxed">The service was amazing. I never had to wait that long for my food. The staff was friendly and attentive, and the delivery was impressively prompt.</p>
+          </div>
+
+          <div class="flex space-x-1 mt-4">
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="max-w-[360px] h-auto py-5 pl-14 pr-4 bg-white border-2 rounded-3xl relative">
+          <img src="https://readymadeui.com/team-5.webp" class="w-20 h-20 rounded-full absolute -left-10 top-0 bottom-0 my-auto border-2 border-gray-300" />
+
+          <div>
+            <h6 class="text-gray-800 text-[15px] font-bold">Mark Adair</h6>
+            <p class="mt-1 text-xs text-gray-500">Founder of Alpha</p>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-gray-800 text-sm leading-relaxed">The service was amazing. I never had to wait that long for my food. The staff was friendly and attentive, and the delivery was impressively prompt.</p>
+          </div>
+
+          <div class="flex space-x-1 mt-4">
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="max-w-[360px] h-auto py-5 pl-14 pr-4 bg-white border-2 rounded-3xl relative">
+          <img src="https://readymadeui.com/team-4.webp" class="w-20 h-20 rounded-full absolute -left-10 top-0 bottom-0 my-auto border-2 border-gray-300" />
+
+          <div>
+            <h6 class="text-gray-800 text-[15px] font-bold">Simon Konecki</h6>
+            <p class="mt-1 text-xs text-gray-500">Founder of Labar</p>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-gray-800 text-sm leading-relaxed">The service was amazing. I never had to wait that long for my food. The staff was friendly and attentive, and the delivery was impressively prompt.</p>
+          </div>
+
+          <div class="flex space-x-1 mt-4">
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+            <svg class="w-4 fill-blue-600" viewBox="0 0 14 13" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="max-w-7xl mx-auto p-4 md:p-8">
+  <h2 class="text-[#192a56] text-5xl font-extrabold mb-4 md:!leading-[55px] text-center pt-2 pb-10">Contact Us</h2>
+  <div class="grid md:grid-cols-2 gap-8 items-start">
+    <div class="bg-gray-50 rounded-lg p-6">
+      <h2 class="text-3xl font-bold text-indigo-900 mb-4">Get in touch</h2>
+      <p class="text-gray-600 mb-8 text-sm">Feel free to contact us and we will get back to you as soon as possible</p>
+
+      <div class="space-y-4">
+        <input
+          type="text"
+          placeholder="Name"
+          class="w-full p-3 rounded-lg bg-white border text-sm border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+        />
+        <input
+          type="email"
+          placeholder="E-mail"
+          class="w-full p-3 rounded-lg bg-white border text-sm border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+        />
+        <textarea
+          placeholder="Message"
+          rows={4}
+          class="w-full p-3 rounded-lg bg-white border text-sm border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none resize-none"
+        ></textarea>
+        <button
+          type="button"
+          class="w-full text-sm bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+
+    <div class="space-y-8">
+      <div class="bg-white rounded-lg p-6 shadow">
+        <h3 class="text-xl font-semibold text-indigo-900 mb-6">Contact Information</h3>
+
+        <div class="space-y-4">
+          <div class="flex items-start space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-indigo-900" viewBox="0 0 64 64">
+              <path d="M32 0A24.032 24.032 0 0 0 8 24c0 17.23 22.36 38.81 23.31 39.72a.99.99 0 0 0 1.38 0C33.64 62.81 56 41.23 56 24A24.032 24.032 0 0 0 32 0zm0 35a11 11 0 1 1 11-11 11.007 11.007 0 0 1-11 11z" data-original="#000000" />
+            </svg>
+            <div>
+              <h4 class="font-semibold text-gray-900 text-sm mb-1">Our Location</h4>
+              <p class="text-gray-600 text-sm">123 Business Street</p>
+              <p class="text-gray-600 text-sm">New York, NY 10001</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-indigo-900" viewBox="0 0 513.64 513.64">
+              <path d="m499.66 376.96-71.68-71.68c-25.6-25.6-69.12-15.359-79.36 17.92-7.68 23.041-33.28 35.841-56.32 30.72-51.2-12.8-120.32-79.36-133.12-133.12-7.68-23.041 7.68-48.641 30.72-56.32 33.28-10.24 43.52-53.76 17.92-79.36l-71.68-71.68c-20.48-17.92-51.2-17.92-69.12 0L18.38 62.08c-48.64 51.2 5.12 186.88 125.44 307.2s256 176.641 307.2 125.44l48.64-48.64c17.921-20.48 17.921-51.2 0-69.12z" data-original="#000000" />
+            </svg>
+            <div>
+              <h4 class="font-semibold text-gray-900 text-sm mb-1">Phone Number</h4>
+              <p class="text-gray-600 text-sm">+1 (555) 123-4567</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-indigo-900" viewBox="0 0 512 512">
+              <path d="M298.789 313.693c-12.738 8.492-27.534 12.981-42.789 12.981-15.254 0-30.05-4.489-42.788-12.981L3.409 173.82A76.269 76.269 0 0 1 0 171.403V400.6c0 26.278 21.325 47.133 47.133 47.133h417.733c26.278 0 47.133-21.325 47.133-47.133V171.402a75.21 75.21 0 0 1-3.416 2.422z" data-original="#000000" />
+              <path d="m20.05 148.858 209.803 139.874c7.942 5.295 17.044 7.942 26.146 7.942 9.103 0 18.206-2.648 26.148-7.942L491.95 148.858c12.555-8.365 20.05-22.365 20.05-37.475 0-25.981-21.137-47.117-47.117-47.117H47.117C21.137 64.267 0 85.403 0 111.408a44.912 44.912 0 0 0 20.05 37.45z" data-original="#000000" />
+            </svg>
+            <div>
+              <h4 class="font-semibold text-gray-900 text-sm mb-1">Email Address</h4>
+              <p class="text-gray-600 text-sm">contact@business.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg p-6 shadow">
+        <h3 class="text-xl font-semibold text-indigo-900 mb-6">Hours of Operation</h3>
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <span class="text-gray-600 text-sm">Monday - Friday</span>
+            <span class="text-gray-800 text-sm">9:00 AM - 6:00 PM</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 text-sm">Saturday</span>
+            <span class="text-gray-800 text-sm">10:00 AM - 4:00 PM</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600 text-sm">Sunday</span>
+            <span class="text-gray-800 text-sm">Closed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="bg-gray-900 text-gray-300 py-6 px-16 font-sans tracking-wide">
+  <div class="flex justify-between items-center max-lg:flex-col text-center flex-wrap gap-4">
+    <p class="text-[15px] leading-loose">© ReadymadeUI. All rights reserved.</p>
+
+    <ul class="flex space-x-6 gap-y-2 max-lg:justify-center flex-wrap">
+      <li><a href="javascript:void(0)" class="text-[15px] hover:text-white">Terms of Service</a></li>
+      <li><a href="javascript:void(0)" class="text-[15px] hover:text-white">Privacy Policy</a></li>
+      <li><a href="javascript:void(0)" class="text-[15px] hover:text-white">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+<script type="module">
+  // Import Firebase SDK
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"; 
+
+  // Firebase Configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
+      authDomain: "foodking-9d9f6.firebaseapp.com",
+      projectId: "foodking-9d9f6",
+      storageBucket: "foodking-9d9f6.firebasestorage.app",
+      messagingSenderId: "986420369140",
+      appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.style.display = 'none'; // Hide the preloader
+    }
+});
+  // Check user authentication state
+  onAuthStateChanged(auth, (user) => {
+      const authLink = document.getElementById("authLink");
+
+      if (user) {
+          // If the user is logged in, set the href to profile
+          authLink.textContent = "Profile";
+          authLink.href = "/user/profile"; // Link to the profile page
+      } else {
+          // If the user is not logged in, set the href to login
+          authLink.textContent = "Login";
+          authLink.href = "/user/login.html"; // Link to the login page
+      }
+  });
+
+  async function fetchProducts() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "products"));
+    if (querySnapshot.empty) {
+      console.log("No products found!");
+    } else {
+      const products = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      console.log("Fetched products:", products);
+
+      const menuSection = document.getElementById("product-menu");
+      menuSection.innerHTML = ""; // Clear previous content
+
+      products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("bg-white", "rounded-3xl", "shadow-xl", "overflow-hidden");
+
+        productCard.innerHTML = `
+          <div class="flex items-center justify-center h-60 bg-gray-100">
+            <img src="${product.imageUrl}" alt="${product.name}" class="w-64 h-64 object-cover rounded-full pt-2 pb-1" />
+          </div>
+          <div class="p-4 sm:p-6">
+            <p class="font-bold text-gray-700 text-[22px] leading-7 mb-1">${product.name}</p>
+            <div class="flex items-center">
+              ${product.discount ? 
+                `<p class="text-[#3C3C4399] text-[17px] mr-2 line-through">${product.price}$</p>
+                <p class="text-[17px] font-bold text-[#0FB478]">${product.discount}$</p>` 
+                : `<p class="text-[17px] font-bold text-[#0FB478]">${product.price}$</p>`}
+            </div>
+            <p class="text-[#7C7C80] text-[15px] mt-6">${product.description}</p>
+<button data-product='${JSON.stringify(product)}' 
+  class="add-to-cart block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize bg-[#FFC933] rounded-[14px] transition-colors duration-300 transform hover:bg-[#FFC933DD] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80">
+  Add to Cart
+</button>
+
+          </div>
+        `;
+
+        // Append the card to the menu section
+        menuSection.appendChild(productCard);
+      });
+
+      // Attach event listeners to "Add to Cart" buttons
+      document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", function () {
+          const product = JSON.parse(this.getAttribute("data-product"));
+          addToCart(product);
+        });
+      });
+
+    }
+  } catch (error) {
+    console.error("Error fetching products: ", error);
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartQuantity();
+  updateProductButtons();
+
+  // Handle Add to Cart button clicks
+  document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", function () {
+      let product = JSON.parse(this.dataset.product);
+      addToCart(product);
+    });
+  });
+
+  // Handle Cart button click to redirect
+  const cartButton = document.getElementById("cartButton");
+  if (cartButton) {
+    cartButton.addEventListener("click", () => {
+      window.location.href = "/cart.html";
+    });
+  }
+});
+
+// Function to add product to cart
+function addToCart(product) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let successMessage = document.getElementById("successMessage");
+
+  // Use discount price if available, otherwise use normal price
+  let finalPrice = product.discount ? product.discount : product.price;
+
+  // Check if product is already in cart
+  let existingProduct = cart.find(item => item.id === product.id);
+  if (!existingProduct) {
+    cart.push({ ...product, price: finalPrice, quantity: 1 });
+  } else {
+    existingProduct.quantity += 1;
+  }
+
+  // Save to local storage
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Show success message
+  successMessage.innerHTML = `${product.name} added to cart! (Total: ${existingProduct ? existingProduct.quantity : 1})`;
+  successMessage.classList.remove("hidden");
+
+  // Hide message after 3 seconds
+  setTimeout(() => {
+    successMessage.classList.add("hidden");
+  }, 3000);
+
+  // Update cart quantity in navbar & button UI
+  updateCartQuantity();
+  updateProductButton(product.id);
+}
+
+// Function to update total cart quantity in navbar
+function updateCartQuantity() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartButton = document.getElementById("cartButton");
+
+  if (cartButton) {
+    cartButton.innerHTML = `
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>Cart (${totalItems})</span>
+    `;
+  }
+}
+
+// Function to replace "Add to Cart" button with quantity
+function updateProductButton(productId) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const product = cart.find(item => item.id === productId);
+  const button = document.querySelector(`.add-to-cart[data-product*='"id":${productId}']`);
+
+  if (button && product) {
+    button.innerHTML = `Quantity: ${product.quantity}`;
+    button.disabled = true;
+    button.classList.add("bg-gray-300", "text-gray-700", "cursor-not-allowed");
+  }
+}
+
+// Function to update all product buttons on page load
+function updateProductButtons() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.forEach(item => updateProductButton(item.id));
+}
+
+// Call fetchProducts on page load
+window.onload = fetchProducts;
+
+</script>
+<script src="script.js"></script>
+
+
+   
+      <script src="https://cdn.tailwindcss.com"></script>
+      
+</body>
+</html>
