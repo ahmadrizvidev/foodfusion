@@ -10,7 +10,72 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
 <body class="bg-gray-100">
-   
+    <header class='flex shadow-[0px_4px_16px_rgba(17,_17,_26,_0.1),_0px_8px_32px_rgba(17,_17,_26,_0.05)] py-4 px-4 sm:px-6 bg-white font-[sans-serif] min-h-[75px] tracking-wide relative z-50'>
+        <div class='flex flex-wrap items-center gap-5 w-full max-w-screen-xl mx-auto'>
+          <a href="/" class="text-3xl font-extrabold tracking-wide flex items-center space-x-2">
+            <i class="fa-solid fa-pizza-slice text-[#ff5733]"></i>
+            <h1 class="text-black">FoodFusion</h1>
+          </a>
+          <div id="collapseMenu"
+            class='max-lg:hidden lg:!flex lg:ml-auto max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-[50]'>
+            <button id="toggleClose" class='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border'>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-black" viewBox="0 0 320.591 320.591">
+                <path
+                  d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                  data-original="#000000"></path>
+                <path
+                  d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                  data-original="#000000"></path>
+              </svg>
+            </button>
+    
+            <ul
+              class='lg:flex gap-4 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
+              <li class='mb-6 hidden max-lg:block'>
+                <a href="javascript:void(0)"><img src="logo.svg" alt="logo" class='w-40' />
+                </a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'>
+                <a href='/'
+                  class='hover:text-[#007bff] text-[#007bff] font-semibold block text-[15px]'>Home</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#about'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>About</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#menu'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Menu</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#reviews'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Reviews</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#contact'
+                class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Contact</a>
+              </li>
+              <li class='max-lg:border-b max-lg:py-3 px-3'>
+                <a id="authLink" href="" class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Login</a>
+            </li>
+            </ul>
+          </div>
+    
+          <div class='flex items-center max-lg:ml-auto space-x-4'>
+            <button id="cartButton" 
+            class='flex items-center justify-center gap-2 px-5 py-3 text-[15px] rounded-lg font-semibold text-[#007bff] border border-[#007bff] bg-transparent hover:bg-[#007bff] hover:text-white shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007bff]'>
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart (0)</span>
+          </button>
+          
+        
+    
+            <button id="toggleOpen" class='lg:hidden'>
+              <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
     <!-- Sidenav -->
     <div class="flex h-screen">
         <div class="w-64 bg-gray-800 text-white p-4">
@@ -74,95 +139,95 @@
     <script type="module">
         // Firebase imports
         import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-
+    
         // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
-    authDomain: "foodking-9d9f6.firebaseapp.com",
-    projectId: "foodking-9d9f6",
-    storageBucket: "foodking-9d9f6.firebasestorage.app",
-    messagingSenderId: "986420369140",
-    appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
+            authDomain: "foodking-9d9f6.firebaseapp.com",
+            projectId: "foodking-9d9f6",
+            storageBucket: "foodking-9d9f6.firebasestorage.app",
+            messagingSenderId: "986420369140",
+            appId: "1:986420369140:web:d8996f23ef6da18f69b0a1"
         };
-
+    
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
-
+    
+        // Fetch user data when page loads
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                fetchUserData(user);
+            } else {
+                window.location.href = "/login.html"; // Redirect to login if no user is found
+            }
+        });
+    
         // Function to fetch user and address data
-        const fetchUserData = async () => {
-            document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        if (!auth.currentUser) {
-            window.location.href = "/login.html";
-            console.log(auth)
-        }
-    }, 100); // 1-second delay to allow Firebase auth state to load
-});
-
+        const fetchUserData = async (user) => {
             try {
                 // Fetch user data from Firestore
                 const userRef = doc(db, 'users', user.uid);
                 const addressesRef = doc(db, 'addresses', user.uid);
-
+    
                 const userDoc = await getDoc(userRef);
                 const addressDoc = await getDoc(addressesRef);
-
-                if (userDoc.exists() && addressDoc.exists()) {
+    
+                if (userDoc.exists()) {
                     const userData = userDoc.data();
-                    const addressData = addressDoc.data();
-
-                    // Display user info on the profile page
                     document.getElementById('user-name').innerText = userData.fullName || 'No Name';
                     document.getElementById('user-email').innerText = userData.email || 'No Email';
+                } else {
+                    console.log('User document does not exist');
+                }
+    
+                if (addressDoc.exists()) {
+                    const addressData = addressDoc.data();
                     document.getElementById('user-address').innerText = addressData.address || 'No Address';
                     document.getElementById('user-phone').innerText = addressData.phone || 'No Phone';
                 } else {
-                    console.log('User or address document does not exist');
+                    console.log('Address document does not exist');
+                    window.location.href = "/user/address.html"; // Redirect to address page if no address is found
                 }
+    
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-
+    
         // Tab switching logic
         document.getElementById('profile-tab').addEventListener('click', () => {
             document.getElementById('profile-content').classList.remove('hidden');
             document.getElementById('order-content').classList.add('hidden');
             document.getElementById('logout-content').classList.add('hidden');
         });
-
+    
         document.getElementById('order-tab').addEventListener('click', () => {
             document.getElementById('profile-content').classList.add('hidden');
             document.getElementById('order-content').classList.remove('hidden');
             document.getElementById('logout-content').classList.add('hidden');
         });
-
+    
         document.getElementById('logout-tab').addEventListener('click', () => {
             document.getElementById('profile-content').classList.add('hidden');
             document.getElementById('order-content').classList.add('hidden');
             document.getElementById('logout-content').classList.remove('hidden');
         });
-
-        // Fetch user data when page loads
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                fetchUserData();
+    
+        // Logout button functionality
+        document.getElementById('logout-button').addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = '/user/login.html'; // Redirect to login page
+            } catch (error) {
+                console.error("Logout failed:", error);
             }
         });
-
-        // Logout button
-        document.getElementById('logout-button').addEventListener('click', async () => {
-            await auth.signOut();
-            window.location.href = '/user/login.html';  // Redirect to login page
-        });
     </script>
-    <script>
-
-        
-    </script>
+    
+  
 </body>
 </html>

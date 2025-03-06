@@ -5,9 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Login</title>
 </head>
 <body>
+  <header class='flex shadow-[0px_4px_16px_rgba(17,_17,_26,_0.1),_0px_8px_32px_rgba(17,_17,_26,_0.05)] py-4 px-4 sm:px-6 bg-white font-[sans-serif] min-h-[75px] tracking-wide relative z-50'>
+    <div class='flex flex-wrap items-center gap-5 w-full max-w-screen-xl mx-auto'>
+      <a href="/" class="text-3xl font-extrabold tracking-wide flex items-center space-x-2">
+        <i class="fa-solid fa-pizza-slice text-[#ff5733]"></i>
+        <h1 class="text-black">FoodFusion</h1>
+      </a>
+      <div id="collapseMenu"
+        class='max-lg:hidden lg:!flex lg:ml-auto max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-[50]'>
+        <button id="toggleClose" class='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border'>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-black" viewBox="0 0 320.591 320.591">
+            <path
+              d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+              data-original="#000000"></path>
+            <path
+              d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+              data-original="#000000"></path>
+          </svg>
+        </button>
+
+        <ul
+          class='lg:flex gap-4 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
+          <li class='mb-6 hidden max-lg:block'>
+            <a href="javascript:void(0)"><img src="logo.svg" alt="logo" class='w-40' />
+            </a>
+          </li>
+          <li class='max-lg:border-b max-lg:py-3 px-3'>
+            <a href='/'
+              class='hover:text-[#007bff] text-[#007bff] font-semibold block text-[15px]'>Home</a>
+          </li>
+          <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#about'
+            class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>About</a>
+          </li>
+          <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#menu'
+            class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Menu</a>
+          </li>
+          <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#reviews'
+            class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Reviews</a>
+          </li>
+          <li class='max-lg:border-b max-lg:py-3 px-3'><a href='../index.html#contact'
+            class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Contact</a>
+          </li>
+          <li class='max-lg:border-b max-lg:py-3 px-3'>
+            <a id="authLink" href="" class='hover:text-[#007bff] text-[#333] font-semibold block text-[15px]'>Login</a>
+        </li>
+        </ul>
+      </div>
+
+      <div class='flex items-center max-lg:ml-auto space-x-4'>
+        <button id="cartButton" 
+        class='flex items-center justify-center gap-2 px-5 py-3 text-[15px] rounded-lg font-semibold text-[#007bff] border border-[#007bff] bg-transparent hover:bg-[#007bff] hover:text-white shadow-md transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#007bff]'>
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Cart (0)</span>
+      </button>
+      
+    
+
+        <button id="toggleOpen" class='lg:hidden'>
+          <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
   <div class="bg-gray-50 font-[sans-serif]">
     <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
       <div class="max-w-md w-full">
@@ -85,109 +152,112 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-   onAuthStateChanged(auth, async(user) => {
-    if (user) {
-      // Redirect to the appropriate page if logged in
-      if (user.email === 'ahmadrizvi.dev@gmail.com') {
-        window.location.href = '/admin.html';
-      } else {
-        const userDocRef = doc(db, "users", user.uid); // assuming you store user info in "users" collection
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-          window.location.href = '/user/profile.html'; // User has a profile, redirect to profile page
-        } else {
-          window.location.href = '/user/address.html'; // First-time user, redirect to address page
+
+    // Check authentication state and redirect
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            if (user.email === 'ahmadrizvi.dev@gmail.com') {
+                window.location.href = '/admin.html';
+            } else {
+                try {
+                    // Check if user has an address in Firestore
+                    const addressDocRef = doc(db, "addresses", user.uid);
+                    const addressDoc = await getDoc(addressDocRef);
+
+                    if (addressDoc.exists()) {
+                        // Address exists → Redirect to profile page
+                        window.location.href = '/user/profile.html';
+                    } else {
+                        // No address found → Redirect to address page
+                        window.location.href = '/user/address.html';
+                    }
+                } catch (error) {
+                    console.error("Error fetching address data:", error);
+                }
+            }
         }
-      }
-    }
-  });
+    });
+
     // Keep User Logged In
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-      } else {
-        localStorage.removeItem('user');
-      }
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
     });
-    
-  
+
     // Login Form Handling
     document.getElementById('login-form').addEventListener('submit', async function(event) {
-      event.preventDefault();
+        event.preventDefault();
   
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
   
-      if (!email || !password) {
-        document.getElementById('error-message').textContent = 'Both email and password are required!';
-        document.getElementById('error-message').classList.remove('hidden');
-        return;
-      }
+        if (!email || !password) {
+            document.getElementById('error-message').textContent = 'Both email and password are required!';
+            document.getElementById('error-message').classList.remove('hidden');
+            return;
+        }
   
-      document.getElementById('submit-btn').setAttribute('disabled', 'true');
-      document.getElementById('loading-icon').classList.remove('hidden');
+        document.getElementById('submit-btn').setAttribute('disabled', 'true');
+        document.getElementById('loading-icon').classList.remove('hidden');
   
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
   
-        if (user.emailVerified) {
-          // Check if the email is "ahmadrizvi.dev"
-          if (user.email === 'ahmadrizvi.dev@gmail.com') {
-            // Redirect to admin page if the email matches
-            localStorage.setItem('user', JSON.stringify(user));
-            document.getElementById('success-message').textContent = 'Login successful! Redirecting to admin...';
-            document.getElementById('success-message').classList.remove('hidden');
-  
-            setTimeout(() => {
-              window.location.href = '/admin.html';
-            }, 2000);
-          } else {
-            // Check if the user profile exists in Firestore
-            const userDocRef = doc(db, "users", user.uid); // assuming you store user info in "users" collection
-            const userDoc = await getDoc(userDocRef);
-  
-            if (userDoc.exists()) {
-              // User exists, redirect to profile page
-              localStorage.setItem('user', JSON.stringify(user));
-              document.getElementById('success-message').textContent = 'Login successful! Redirecting...';
-              document.getElementById('success-message').classList.remove('hidden');
-  
-              setTimeout(() => {
-                window.location.href = '/user/profile.html';
-              }, 2000);
+            if (user.emailVerified) {
+                if (user.email === 'ahmadrizvi.dev@gmail.com') {
+                    // Redirect to admin page
+                    localStorage.setItem('user', JSON.stringify(user));
+                    document.getElementById('success-message').textContent = 'Login successful! Redirecting to admin...';
+                    document.getElementById('success-message').classList.remove('hidden');
+                    setTimeout(() => {
+                        window.location.href = '/admin.html';
+                    }, 2000);
+                } else {
+                    // Check if the user has an address in Firestore
+                    const addressDocRef = doc(db, "addresses", user.uid);
+                    const addressDoc = await getDoc(addressDocRef);
+
+                    if (addressDoc.exists()) {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        document.getElementById('success-message').textContent = 'Login successful! Redirecting...';
+                        document.getElementById('success-message').classList.remove('hidden');
+                        setTimeout(() => {
+                            window.location.href = '/user/profile.html';
+                        }, 2000);
+                    } else {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        document.getElementById('success-message').textContent = 'Login successful! Redirecting...';
+                        document.getElementById('success-message').classList.remove('hidden');
+                        setTimeout(() => {
+                            window.location.href = '/user/address.html';
+                        }, 2000);
+                    }
+                }
             } else {
-              // First-time user, redirect to address page
-              localStorage.setItem('user', JSON.stringify(user));
-              document.getElementById('success-message').textContent = 'Login successful! Redirecting...';
-              document.getElementById('success-message').classList.remove('hidden');
-  
-              setTimeout(() => {
-                window.location.href = '/user/address.html';
-              }, 2000);
+                document.getElementById('error-message').textContent = 'Please verify your email before logging in.';
+                document.getElementById('error-message').classList.remove('hidden');
             }
-          }
-        } else {
-          document.getElementById('error-message').textContent = 'Please verify your email before logging in.';
-          document.getElementById('error-message').classList.remove('hidden');
+        } catch (error) {
+            const errorCode = error.code;
+            if (errorCode === 'auth/wrong-password') {
+                document.getElementById('error-message').textContent = 'Incorrect password. Please try again.';
+            } else if (errorCode === 'auth/user-not-found') {
+                document.getElementById('error-message').textContent = 'No user found with this email.';
+            } else {
+                document.getElementById('error-message').textContent = `Error: ${error.message}`;
+            }
+            document.getElementById('error-message').classList.remove('hidden');
+        } finally {
+            document.getElementById('submit-btn').removeAttribute('disabled');
+            document.getElementById('loading-icon').classList.add('hidden');
         }
-      } catch (error) {
-        const errorCode = error.code;
-        if (errorCode === 'auth/wrong-password') {
-          document.getElementById('error-message').textContent = 'Incorrect password. Please try again.';
-        } else if (errorCode === 'auth/user-not-found') {
-          document.getElementById('error-message').textContent = 'No user found with this email.';
-        } else {
-          document.getElementById('error-message').textContent = `Error: ${error.message}`;
-        }
-        document.getElementById('error-message').classList.remove('hidden');
-      } finally {
-        document.getElementById('submit-btn').removeAttribute('disabled');
-        document.getElementById('loading-icon').classList.add('hidden');
-      }
     });
-  </script>
-  
+</script>
+
   
 </body>
 </html>

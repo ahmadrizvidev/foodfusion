@@ -1,9 +1,9 @@
 // Import Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-// Firebase Configuration (Replace with your credentials)
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAaXkhgNCJFOz3S4FvVOBL-QSApjvp-lhk",
     authDomain: "foodking-9d9f6.firebaseapp.com",
@@ -17,22 +17,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-onAuthStateChanged(auth, async(user) => {
+
+// Check authentication state and redirect user accordingly
+onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // Redirect to the appropriate page if logged in
-      if (user.email === 'ahmadrizvi.dev@gmail.com') {
-        window.location.href = '/admin.html';
-      } else {
-        const userDocRef = doc(db, "users", user.uid); // assuming you store user info in "users" collection
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-          window.location.href = '/user/profile.html'; // User has a profile, redirect to profile page
+        if (user.email === 'ahmadrizvi.dev@gmail.com') {
+            window.location.href = '/admin.html';
         } else {
-          window.location.href = '/user/address.html'; // First-time user, redirect to address page
+            try {
+                const userDocRef = doc(db, "users", user.uid);
+                const addressDocRef = doc(db, "addresses", user.uid);
+
+                const userDoc = await getDoc(userDocRef);
+                const addressDoc = await getDoc(addressDocRef);
+
+                if (userDoc.exists()) {
+                    if (addressDoc.exists() && addressDoc.data().address) {
+                        window.location.href = '/user/profile.html'; // User has an address, go to profile
+                    } else {
+                        window.location.href = '/user/address.html'; // No address, go to address page
+                    }
+                } else {
+                    console.log("User document not found.");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
         }
-      }
     }
-  });
+});
+
 // Register Form Handling
 document.getElementById("registerForm").addEventListener("submit", async function(event) {
     event.preventDefault();
